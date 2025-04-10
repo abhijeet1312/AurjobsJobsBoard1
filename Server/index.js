@@ -9,6 +9,7 @@ import jobRoutes from "./routes/job-route.js";
 import matchRoutes from "./routes/matchRoutes.js";
 import job_external_routes from "./routes/job_external_routes.js"
 import payment_routes from "./routes/payment-route.js"
+import resume_routes from "./routes/resume-route.js"
 import prerender from "prerender-node";
 import path from "path";
 import { configurePassport, passport } from "./config/passport.js";
@@ -35,6 +36,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
 // Middleware
@@ -50,6 +52,7 @@ app.use("/jobs_post", jobRoutes);
 app.use("/match", matchRoutes);
 app.use("/external_jobs", job_external_routes);
 app.use("/payments", payment_routes);
+app.use("/ai_resume", resume_routes);
 
 
 // Serve static assets if you have any (for production)

@@ -32,7 +32,7 @@ const JobDetailsPage = () => {
   const candidate_id = candidateProfile?.candidate_id;
   const params = useParams()
   const location = useLocation();
-  
+
   const job_id = location.state?.jobId;
 
   // const adRef = useRef(null);
@@ -78,238 +78,102 @@ const JobDetailsPage = () => {
 
   const education = candidateProfile?.education?.map((edu) => `${edu.candidate_degree} (${edu.candidate_education_level}) from ${edu.candidate_institute}, Score: ${edu.candidate_score}, ${edu.candidate_start_year}-${edu.candidate_end_year}`).join(', ');
 
-  // const formatCandidateProfile = (candidate) => {
-  //   // Helper function to extract current role and details
-  //   const extractCurrentRole = (experiences) => {
-  //     if (!experiences || experiences.length === 0) {
-  //       return {
-  //         currentRole: "No current role specified",
-  //         currentCompany: "Not specified",
-  //         currentIndustry: "Not specified",
-  //         currentJobType: "Not specified"
-  //       };
-  //     }
 
-  //     // Sort experiences by end date to get the most recent
-  //     const sortedExperiences = experiences.sort((a, b) => 
-  //       new Date(b.candidate_end_date) - new Date(a.candidate_end_date)
-  //     );
 
-  //     const mostRecentExperience = sortedExperiences[0];
+  function formatCandidateProfile(candidateData) {
+    try {
+      // Extract basic information
+      const basics = `${candidateData.candidate_first_name} ${candidateData.candidate_last_name} (${candidateData.candidate_gender}, DOB: ${candidateData.candidate_date_of_birth}), Email: ${candidateData.candidate_email}, Phone: ${candidateData.candidate_phone}, Location: ${candidateData.candidate_location}, Current Role: ${candidateData.candidate_current_role}, Current Salary: ${candidateData.candidate_current_salary}, Availability: ${candidateData.candidate_availability}, Work Preference: ${candidateData.candidate_work_preference}`;
 
-  //     return {
-  //       currentRole: mostRecentExperience.candidate_job_role || "No role specified",
-  //       currentCompany: mostRecentExperience.candidate_company || "No company specified",
-  //       currentIndustry: mostRecentExperience.candidate_industry || "Not specified",
-  //       currentJobType: mostRecentExperience.candidate_job_type || "Not specified"
-  //     };
-  //   };
+      // Extract skills
+      const skills = candidateData.skills.map(skill => skill.candidate_skill).join(", ");
 
-  //   // Helper function to format experience
-  //   const formatExperience = (experience) => {
-  //     if (!experience?.candidate_start_date || !experience?.candidate_end_date) {
-  //       return "Experience details not available.";
-  //     }
+      // Extract languages
+      const languages = candidateData.languages.map(lang => `${lang.candidate_language} (${lang.candidate_proficiency})`).join(", ");
 
-  //     // Calculate experience duration
-  //     const start = new Date(experience.candidate_start_date);
-  //     const end = new Date(experience.candidate_end_date);
+      // Extract experiences
+      // const experiences = candidateData.experiences.map(exp => 
+      //   `${exp.candidate_job_role} at ${exp.candidate_company} (${exp.candidate_job_type}, ${exp.candidate_start_date} to ${exp.candidate_end_date}, Industry: ${exp.candidate_industry})`
+      // ).join(", ");
+      const formatExperience = (experience) => {
+        if (!experience?.candidate_start_date || !experience?.candidate_end_date) return "Experience details not available.";
+        const start = new Date(experience.candidate_start_date);
+        const end = new Date(experience.candidate_end_date);
+        let years = end.getFullYear() - start.getFullYear();
+        let months = end.getMonth() - start.getMonth();
+        if (months < 0) { years--; months += 12; }
+        const duration = years > 0 ? `${years} years` : "";
+        const monthsText = months > 0 ? `${months} months` : "";
+        return `${experience.candidate_job_role} at ${experience.candidate_company} for ${[duration, monthsText].filter(Boolean).join(" ")}.`;
+      };
 
-  //     let years = end.getFullYear() - start.getFullYear();
-  //     let months = end.getMonth() - start.getMonth();
+      // Extract education
+      const education = candidateData.education.map(edu =>
+        `${edu.candidate_degree} in ${edu.candidate_degree_specialization} from ${edu.candidate_institute} (${edu.candidate_start_year}-${edu.candidate_end_year}, Score: ${edu.candidate_score})`
+      ).join(", ");
 
-  //     if (months < 0) {
-  //       years--;
-  //       months += 12;
-  //     }
+      // Extract certifications
+      const certifications = candidateData.certifications.map(cert =>
+        `${cert.candidate_certificate_name} from ${cert.certificate_issuing_organization} (Issued: ${cert.certificate_issue_date})`
+      ).join(", ");
 
-  //     const duration = years > 0 ? `${years} years` : "";
-  //     const monthsText = months > 0 ? `${months} months` : "";
-  //     const experienceDuration = [duration, monthsText].filter(Boolean).join(" ");
+      // Extract address
+      const address = candidateData.addresses.map(addr =>
+        `${addr.candidate_address_line_1}, ${addr.candidate_address_line_2}, ${addr.candidate_city}, ${addr.candidate_state}, ${addr.candidate_country}, ${addr.candidate_postal_code}`
+      ).join(", ");
 
-  //     // Construct the sentence
-  //     return `${experience.candidate_job_role} at ${experience.candidate_company} for ${experienceDuration}.`;
-  //     // return ` ${experienceDuration}.`;
+      // Extract preferences
+      const pref = candidateData.preferences[0];
+      const preferences = `Work Authorization: ${pref.work_authorization}, Expected Salary: ${pref.expected_salary} per ${pref.salary_structure}, Job Preference: ${pref.job_preference}, Preferred Industry: ${pref.preferred_industry}, Company Size: ${pref.company_size}, Employment Type: ${pref.employment_type}, Willing to Relocate: ${pref.willing_to_relocate}, Open to Travel: ${pref.open_to_travel}, Preferred Work Location: ${pref.preferred_work_location}, Veteran Status: ${pref.veteran_status}, PWD: ${pref.pwd}, Star Rating: ${pref.star_rating}`;
 
-  //   };
+      // Extract links
+      const links = `Resume: ${candidateData.candidate_resume_link}, GitHub: ${candidateData.candidate_github_link}, LinkedIn: ${candidateData.candidate_linkedin_link}, Image: ${candidateData.candidate_image_link}`;
 
-  //   // Calculate age
-  //   const calculateAge = (dob) => {
-  //     const birthDate = new Date(dob);
-  //     const today = new Date();
-  //     let age = today.getFullYear() - birthDate.getFullYear();
-  //     const monthDiff = today.getMonth() - birthDate.getMonth();
-  //     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-  //       age--;
-  //     }
-  //     return age;
-  //   };
-
-  //   // Format skills
-  //   const formatSkills = (skills) => {
-  //     return skills.map(skill => skill.candidate_skill.trim()).join(", ");
-  //   };
-
-  //   // Format languages
-  //   const formatLanguages = (languages) => {
-  //     return languages.map(lang => 
-  //       `${lang.candidate_language} (${lang.candidate_proficiency} proficiency)`
-  //     ).join(", ");
-  //   };
-
-  //   // Format education
-  //   const formatEducation = (education) => {
-  //     if (!education || education.length === 0) return "No education details available.";
-  //     const edu = education[0];
-  //     return `${edu.candidate_degree} from ${edu.candidate_institute}, graduated in ${edu.candidate_end_year} with ${edu.candidate_score} CGPA.`;
-  //   };
-
-  //   // Extract current role and details
-  //   const currentRoleDetails = extractCurrentRole(candidate.experiences);
-
-  //   // Compile the complete profile text
-  //   const profileText = `
-  // Candidate Comprehensive Profile for ${candidate.candidate_first_name} ${candidate.candidate_last_name}:
-
-  // Professional Overview:
-  // - Current Role: ${currentRoleDetails.currentRole}
-  // - Current Company: ${currentRoleDetails.currentCompany}
-  // - Industry: ${currentRoleDetails.currentIndustry}
-  // - Job Type: ${currentRoleDetails.currentJobType}
-
-  // Financial Details:
-  // - Current Salary: ${candidate.candidate_current_salary > 0 
-  //   ? `₹${candidate.candidate_current_salary.toLocaleString()}` 
-  //   : "Not specified"}
-
-  // Career Preferences:
-  // - Work Preference: ${candidate.candidate_work_preference}
-  // - Availability: ${candidate.candidate_availability}
-
-  // Personal Details:
-  // - Age: ${calculateAge(candidate.candidate_date_of_birth)} years old
-  // - Location: ${candidate.candidate_location}
-  // - Gender: ${candidate.candidate_gender}
-
-  // Education:
-  // ${formatEducation(candidate.education)}
-
-  // Professional Experience:
-  // ${candidate.experiences.map(formatExperience).join("\n")}
-
-  // Technical Skills:
-  // ${formatSkills(candidate.skills)}
-
-  // Language Proficiencies:
-  // ${formatLanguages(candidate.languages)}
-
-  // Professional Links:
-  // - GitHub: ${candidate.candidate_github_link}
-  // - LinkedIn: ${candidate.candidate_linkedin_link}
-  // - Resume: ${candidate.candidate_resume_link}
-
-  // Additional Information:
-  // - Profile Status: ${candidate.candidate_profile_status}
-  // - Last Updated: ${new Date(candidate.candidate_updated_at).toLocaleDateString()}
-  //   `.trim();
-
-  //   return profileText;
-  // };
-
-  // function formatCandidateProfile(candidateData) {
-  //   try {
-  //     // Extract basic information
-  //     const basics = `${candidateData.candidate_first_name} ${candidateData.candidate_last_name} (${candidateData.candidate_gender}, DOB: ${candidateData.candidate_date_of_birth}), Email: ${candidateData.candidate_email}, Phone: ${candidateData.candidate_phone}, Location: ${candidateData.candidate_location}, Current Role: ${candidateData.candidate_current_role}, Current Salary: ${candidateData.candidate_current_salary}, Availability: ${candidateData.candidate_availability}, Work Preference: ${candidateData.candidate_work_preference}`;
-
-  //     // Extract skills
-  //     const skills = candidateData.skills.map(skill => skill.candidate_skill).join(", ");
-
-  //     // Extract languages
-  //     const languages = candidateData.languages.map(lang => `${lang.candidate_language} (${lang.candidate_proficiency})`).join(", ");
-
-  //     // Extract experiences
-  //     // const experiences = candidateData.experiences.map(exp => 
-  //     //   `${exp.candidate_job_role} at ${exp.candidate_company} (${exp.candidate_job_type}, ${exp.candidate_start_date} to ${exp.candidate_end_date}, Industry: ${exp.candidate_industry})`
-  //     // ).join(", ");
-  //     const formatExperience = (experience) => {
-  //       if (!experience?.candidate_start_date || !experience?.candidate_end_date) return "Experience details not available.";
-  //       const start = new Date(experience.candidate_start_date);
-  //       const end = new Date(experience.candidate_end_date);
-  //       let years = end.getFullYear() - start.getFullYear();
-  //       let months = end.getMonth() - start.getMonth();
-  //       if (months < 0) { years--; months += 12; }
-  //       const duration = years > 0 ? `${years} years` : "";
-  //       const monthsText = months > 0 ? `${months} months` : "";
-  //       return `${experience.candidate_job_role} at ${experience.candidate_company} for ${[duration, monthsText].filter(Boolean).join(" ")}.`;
-  //   };
-
-  //     // Extract education
-  //     const education = candidateData.education.map(edu => 
-  //       `${edu.candidate_degree} in ${edu.candidate_degree_specialization} from ${edu.candidate_institute} (${edu.candidate_start_year}-${edu.candidate_end_year}, Score: ${edu.candidate_score})`
-  //     ).join(", ");
-
-  //     // Extract certifications
-  //     const certifications = candidateData.certifications.map(cert => 
-  //       `${cert.candidate_certificate_name} from ${cert.certificate_issuing_organization} (Issued: ${cert.certificate_issue_date})`
-  //     ).join(", ");
-
-  //     // Extract address
-  //     const address = candidateData.addresses.map(addr => 
-  //       `${addr.candidate_address_line_1}, ${addr.candidate_address_line_2}, ${addr.candidate_city}, ${addr.candidate_state}, ${addr.candidate_country}, ${addr.candidate_postal_code}`
-  //     ).join(", ");
-
-  //     // Extract preferences
-  //     const pref = candidateData.preferences[0];
-  //     const preferences = `Work Authorization: ${pref.work_authorization}, Expected Salary: ${pref.expected_salary} per ${pref.salary_structure}, Job Preference: ${pref.job_preference}, Preferred Industry: ${pref.preferred_industry}, Company Size: ${pref.company_size}, Employment Type: ${pref.employment_type}, Willing to Relocate: ${pref.willing_to_relocate}, Open to Travel: ${pref.open_to_travel}, Preferred Work Location: ${pref.preferred_work_location}, Veteran Status: ${pref.veteran_status}, PWD: ${pref.pwd}, Star Rating: ${pref.star_rating}`;
-
-  //     // Extract links
-  //     const links = `Resume: ${candidateData.candidate_resume_link}, GitHub: ${candidateData.candidate_github_link}, LinkedIn: ${candidateData.candidate_linkedin_link}, Image: ${candidateData.candidate_image_link}`;
-
-  //     // Combine all sections
-  //     return `${basics} | Skills: ${skills} | Languages: ${languages} | Experience: Experience: ${candidateData.experiences.map(formatExperience).join(" ")} | Education: ${education} | Certifications: ${certifications} | Address: ${address} | Preferences: ${preferences} | Links: ${links}`;
-  //   } catch (error) {
-  //     return `Error processing candidate data: ${error.message}`;
-  //   }
-  // }
+      // Combine all sections
+      return `${basics} | Skills: ${skills} | Languages: ${languages} | Experience: Experience: ${candidateData.experiences.map(formatExperience).join(" ")} | Education: ${education} | Certifications: ${certifications} | Address: ${address} | Preferences: ${preferences} | Links: ${links}`;
+    } catch (error) {
+      return `Error processing candidate data: ${error.message}`;
+    }
+  }
 
   // Example usage:
   // const candidateProfileOneLine = getCandidateProfileAsOneLine(candidateData);
   // console.log(candidateProfileOneLine);
 
-  function formatCandidateProfile(candidateData) {
-    try {
-      // Calculate age based on date of birth
-      const dob = new Date(candidateData.candidate_date_of_birth);
-      const today = new Date();
-      let age = today.getFullYear() - dob.getFullYear();
-      const monthDiff1 = today.getMonth() - dob.getMonth();
-      if (monthDiff1 < 0 || (monthDiff1 === 0 && today.getDate() < dob.getDate())) {
-        age--;
-      }
+  // function formatCandidateProfile(candidateData) {
+  //   try {
+  //     // Calculate age based on date of birth
+  //     const dob = new Date(candidateData.candidate_date_of_birth);
+  //     const today = new Date();
+  //     let age = today.getFullYear() - dob.getFullYear();
+  //     const monthDiff1 = today.getMonth() - dob.getMonth();
+  //     if (monthDiff1 < 0 || (monthDiff1 === 0 && today.getDate() < dob.getDate())) {
+  //       age--;
+  //     }
 
-      // Calculate experience duration
-      const experience = candidateData.experiences[0];
-      const startDate = new Date(experience.candidate_start_date);
-      const endDate = new Date(experience.candidate_end_date);
-      const monthDiff = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth());
+  //     // Calculate experience duration
+  //     const experience = candidateData.experiences[0];
+  //     const startDate = new Date(experience?.candidate_start_date);
+  //     const endDate = new Date(experience?.candidate_end_date);
+  //     const monthDiff = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth());
 
-      // Skills as a list
-      const skills = candidateData.skills.map(skill => skill.candidate_skill).join(" ");
+  //     // Skills as a list
+  //     const skills = candidateData.skills.map(skill => skill.candidate_skill).join(" ");
 
-      // Format education
-      const education = candidateData.education[0];
+  //     // Format education
+  //     const education = candidateData.education[0];
 
-      // Format languages
-      const languages = candidateData.languages.map(lang =>
-        `${lang.candidate_language} ${lang.candidate_proficiency}`
-      ).join(" ");
+  //     // Format languages
+  //     const languages = candidateData.languages.map(lang =>
+  //       `${lang.candidate_language} ${lang.candidate_proficiency}`
+  //     ).join(" ");
 
-      // Create the formatted text
-      return `${candidateData.candidate_first_name} ${candidateData.candidate_last_name} Email Phone LinkedIn GitHub ${experience.candidate_job_role} at ${experience.candidate_company} for ${monthDiff} months skilled in ${skills} developed and optimized backend services using  job matching algorithms improved system performance scalability and security collaborated with cross-functional teams to stability ${education.candidate_degree} from ${education.candidate_institute} graduated in ${education.candidate_end_year} with ${education.candidate_score} CGPA Age ${age} Location ${candidateData.candidate_location} Gender ${candidateData.candidate_gender} Language Proficiencies ${languages} Work Preference ${candidateData.candidate_work_preference} Availability ${candidateData.candidate_availability} Current Salary ${candidateData.candidate_current_salary} GitHub ${candidateData.candidate_github_link} LinkedIn ${candidateData.candidate_linkedin_link} Resume ${candidateData.candidate_resume_link} Profile Status ${candidateData.candidate_profile_status} Last Updated ${candidateData.candidate_updated_at.split('T')[0].replace(/-/g, '')}`;
-    } catch (error) {
-      return `Error formatting candidate data: ${error.message}`;
-    }
-  }
+  //     // Create the formatted text
+  //     return `${candidateData.candidate_first_name} ${candidateData.candidate_last_name} Email Phone LinkedIn GitHub ${experience?.candidate_job_role} at ${experience?.candidate_company} for ${monthDiff} months skilled in ${skills} developed and optimized backend services using  job matching algorithms improved system performance scalability and security collaborated with cross-functional teams to stability ${education.candidate_degree} from ${education.candidate_institute} graduated in ${education.candidate_end_year} with ${education.candidate_score} CGPA Age ${age} Location ${candidateData.candidate_location} Gender ${candidateData.candidate_gender} Language Proficiencies ${languages} Work Preference ${candidateData.candidate_work_preference} Availability ${candidateData.candidate_availability} Current Salary ${candidateData.candidate_current_salary} GitHub ${candidateData.candidate_github_link} LinkedIn ${candidateData.candidate_linkedin_link} Resume ${candidateData.candidate_resume_link} Profile Status ${candidateData.candidate_profile_status} Last Updated ${candidateData.candidate_updated_at.split('T')[0].replace(/-/g, '')}`;
+  //   } catch (error) {
+  //     return `Error formatting candidate data: ${error.message}`;
+  //   }
+  // }
 
   console.log(formatCandidateProfile(candidateProfile))
 
@@ -448,7 +312,7 @@ const JobDetailsPage = () => {
       .trim();
   }
 
-  // console.log(convertJobDescriptionToOneLine(jobDetails?.job_description));
+  console.log(convertJobDescriptionToOneLine(jobDetails?.job_description));
 
   const screeningData = {
     candidate: {
@@ -653,6 +517,15 @@ const JobDetailsPage = () => {
         <JobDetailsSkeleton />
       ) : (
         <div className="min-h-screen mt-20 bg-gray-50 py-8 px-4">
+
+
+          <div className="hidden xl:block fixed right-4 top-32 w-48 h-screen">
+            <div className="sticky top-4 space-y-4">
+            <a target='_blank' href="https://topresume.com/resume-review/?pt=qGYzJcFvQZgEn&utm_medium=referral&utm_source=banner&utm_campaign=aurjobs&utm_content=generic-blue-review&utm_term=resume-review">
+            <img src="//static-cdn.topresume.com/tr-180X150.jpg?pt=qGYzJcFvQZgEn" width="480px" height="900px"/></a>
+           
+            </div>
+          </div>
           <div className="max-w-4xl mx-auto">
             {/* Header Section */}
 
@@ -844,10 +717,10 @@ const JobDetailsPage = () => {
               </div>
             </div>
 
-            {/* <GoogleAd slot="8506441329" /> */}
-
-
-
+            {/* <div className="mb-6">
+              <a href="https://topresume.com/resume-review/?pt=qGYzJcFvQZgEn&utm_medium=referral&utm_source=banner&utm_campaign=aurjobs&utm_content=generic-blue-review&utm_term=resume-review">
+                <img src="//static-cdn.topresume.com/tr-600X250.jpg?pt=qGYzJcFvQZgEn" width="900px" height="100px" /></a>
+            </div> */}
 
             {/* Main Content */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -880,27 +753,27 @@ const JobDetailsPage = () => {
                       </span>
                     ))}
                   </div>
-                 
+
                 </div>
               </div>
               {!hasApplied && (
-                    <div className="block sm:hidden mt-6">
-                      {jobDetails?.job_link ? (
-                        <a href={jobDetails?.job_link} target='_blank'>
-                          <button className="w-full cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all text-center shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95">
-                            Apply Now
-                          </button>
-                        </a>
-                      ) : (
-                        <button
-                          onClick={handleApply}
-                          className="w-full cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all text-center shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95"
-                        >
-                          Apply Now
-                        </button>
-                      )}
-                    </div>
+                <div className="block sm:hidden mt-6">
+                  {jobDetails?.job_link ? (
+                    <a href={jobDetails?.job_link} target='_blank'>
+                      <button className="w-full cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all text-center shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95">
+                        Apply Now
+                      </button>
+                    </a>
+                  ) : (
+                    <button
+                      onClick={handleApply}
+                      className="w-full cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all text-center shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:scale-95"
+                    >
+                      Apply Now
+                    </button>
                   )}
+                </div>
+              )}
 
               {/* Right Column - Additional Info */}
               <div className="space-y-6">

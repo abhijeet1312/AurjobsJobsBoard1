@@ -284,7 +284,7 @@ const Preference = ({ candidateData, isEditing, handlePreferenceArrayItemChange,
                                     />
                                 </div>
 
-                                <div className="relative group">
+                                {/* <div className="relative group">
                                     <label className="block text-sm font-medium text-gray-700 mb-1">
                                         Star Rating
                                     </label>
@@ -300,7 +300,7 @@ const Preference = ({ candidateData, isEditing, handlePreferenceArrayItemChange,
                                         <option value="4">4 - Very Good</option>
                                         <option value="5">5 - Excellent</option>
                                     </select>
-                                </div>
+                                </div> */}
 
                                 <div className="relative group">
 
@@ -407,7 +407,7 @@ const Preference = ({ candidateData, isEditing, handlePreferenceArrayItemChange,
                                         )}
                                     </div>
                                 </div>
-                                <div className="space-y-1">
+                                {/* <div className="space-y-1">
                                     <p className="text-sm font-medium text-gray-500">Star Rating</p>
                                     <div className="flex">
                                         {[1, 2, 3, 4, 5].map((star) => (
@@ -416,7 +416,7 @@ const Preference = ({ candidateData, isEditing, handlePreferenceArrayItemChange,
                                             </span>
                                         ))}
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="space-y-1">
                                     <p className="text-sm font-medium text-gray-500">Preferred Work Location</p>
                                     <p className="text-gray-800">{preference.preferred_work_location || '-'}</p>
