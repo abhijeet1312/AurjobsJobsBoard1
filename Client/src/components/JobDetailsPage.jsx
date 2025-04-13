@@ -35,8 +35,6 @@ const JobDetailsPage = () => {
 
   const job_id = location.state?.jobId;
 
-  // const adRef = useRef(null);
-  // const [adsLoaded, setAdsLoaded] = useState(false);
 
 
 
@@ -136,47 +134,9 @@ const JobDetailsPage = () => {
     }
   }
 
-  // Example usage:
-  // const candidateProfileOneLine = getCandidateProfileAsOneLine(candidateData);
-  // console.log(candidateProfileOneLine);
 
-  // function formatCandidateProfile(candidateData) {
-  //   try {
-  //     // Calculate age based on date of birth
-  //     const dob = new Date(candidateData.candidate_date_of_birth);
-  //     const today = new Date();
-  //     let age = today.getFullYear() - dob.getFullYear();
-  //     const monthDiff1 = today.getMonth() - dob.getMonth();
-  //     if (monthDiff1 < 0 || (monthDiff1 === 0 && today.getDate() < dob.getDate())) {
-  //       age--;
-  //     }
 
-  //     // Calculate experience duration
-  //     const experience = candidateData.experiences[0];
-  //     const startDate = new Date(experience?.candidate_start_date);
-  //     const endDate = new Date(experience?.candidate_end_date);
-  //     const monthDiff = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth());
-
-  //     // Skills as a list
-  //     const skills = candidateData.skills.map(skill => skill.candidate_skill).join(" ");
-
-  //     // Format education
-  //     const education = candidateData.education[0];
-
-  //     // Format languages
-  //     const languages = candidateData.languages.map(lang =>
-  //       `${lang.candidate_language} ${lang.candidate_proficiency}`
-  //     ).join(" ");
-
-  //     // Create the formatted text
-  //     return `${candidateData.candidate_first_name} ${candidateData.candidate_last_name} Email Phone LinkedIn GitHub ${experience?.candidate_job_role} at ${experience?.candidate_company} for ${monthDiff} months skilled in ${skills} developed and optimized backend services using  job matching algorithms improved system performance scalability and security collaborated with cross-functional teams to stability ${education.candidate_degree} from ${education.candidate_institute} graduated in ${education.candidate_end_year} with ${education.candidate_score} CGPA Age ${age} Location ${candidateData.candidate_location} Gender ${candidateData.candidate_gender} Language Proficiencies ${languages} Work Preference ${candidateData.candidate_work_preference} Availability ${candidateData.candidate_availability} Current Salary ${candidateData.candidate_current_salary} GitHub ${candidateData.candidate_github_link} LinkedIn ${candidateData.candidate_linkedin_link} Resume ${candidateData.candidate_resume_link} Profile Status ${candidateData.candidate_profile_status} Last Updated ${candidateData.candidate_updated_at.split('T')[0].replace(/-/g, '')}`;
-  //   } catch (error) {
-  //     return `Error formatting candidate data: ${error.message}`;
-  //   }
-  // }
-
-  console.log(formatCandidateProfile(candidateProfile))
-
+ 
 
   const [jobDetails, setJobDetails] = useState(null);
 
@@ -312,39 +272,56 @@ const JobDetailsPage = () => {
       .trim();
   }
 
-  console.log(convertJobDescriptionToOneLine(jobDetails?.job_description));
+  // console.log(convertJobDescriptionToOneLine(jobDetails?.job_description));
 
   const screeningData = {
-    candidate: {
-      skills: skills || '',
-      experience: experience || '0',
-      candidateProfile: formatCandidateProfile(candidateProfile)
-      // candidateProfile:"SIDDHARTH GEERANAVAR Bengaluru siddharthsgeeranavar@gmail.com +91-9380633458 Linkedin Portfolio PROFESSIONAL SUMMARY As a passionate UIUX designer I have cultivated a strong foundation in user experience and interface design I am eager to bring my expertise and creativity to a dynamic team and contribute to impactful digital solution My commitment to continuous learning and attention to detail drives me to stay ahead of design trends and deliver exceptional user experiences SKILLS Tools Figma Adobe Photoshop Design Skills UIUX design App design Website design Responsive design Email template design Poster design Design System Wireframing Prototyping UI Principles Color theory Typography Design Principles Research Skills User Research UX Laws Problem Solving Skills Design Thinking Problem Solving UX Design Principles EXPERIENCE UIUX Designer Freelance May 2024 June 2024 Designed a social media app in which a person can post anything watch videos read news and can send message to others via unique id EDUCATION Master of Computer Application February 2023 October 2024 Dayananda Sagar College of Engineering Bengaluru CGPA 7.910 Bachelor of Computer Application August 2019 September 2022 KLE RLS BCA College Belagavi Percentage 63 PROJECTS Pre-owned car website design January 2024 January 2024 I designed a website in which a person can check out the pre-owned cars book a test drive book a service The person can also checkout the status of the service can compare cars filter out cars check cars based on category Furniture website design February 2024 February 2024 Designed a website design in which a person can check out different kind furniture and buy them The user can book a service for old furniture sell and exchange furniture and will be able to customize furniture Shoes app design March 2024 March 2024 Designed a shoe app in which a person can view and buy shoe brands like Puma Nike Adidas Restaurant menu app design April 2024 April 2024 The restaurant menu is aimed at creating a visually appealing and user-friendly digital menu Mobile app signup flow design July 2024 July 2024 This involves designing a mobile app signup flow aimed at making the account creation process user friendly Email Marketing Template design August 2024 August 2024 The primary purpose of the template is to promote and showcase the luxury and features of Rolex submariner watch CERTIFICATIONS Google via Coursera Foundation of User Experience Design IBM Enterprise of Design Thinking Practioner Infosys UX and UI Designing with Color Theory Great Learning UIUX for Beginners GUVI Learn design thinking and create better UIUX design Lets Upgrade Figma Bootcamp Lets Upgrade Graphic Designing Bootcamp"
-      // candidateProfile:"Abhishek Kuswaha Email Phone LinkedIn GitHub Backend Developer at Aurjobs for 9 months skilled in React JavaScript Express.js Next.js Node.js Firebase REST API PostgreSQL developed and optimized backend services using Node.js Express optimized and managed MongoDB and PostgreSQL databases implemented AI-based job matching algorithms improved system performance scalability and security collaborated with cross-functional teams to design and deploy new features debugged and troubleshot issues ensuring platform stability Bachelor of Technology BTech from Uptu graduated in 2025 with 6 CGPA Age 24 Location Delhi Gender Male Language Proficiencies English Beginner Hindi Beginner Spanish Beginner Work Preference Hybrid Availability Immediately Current Salary 75000 GitHub httpsgithubcomabhishek LinkedIn httpslinkedincominanjali Resume vegooglecomfiled1fdYF5Jl7bUhCEIDjfZw6KzDhmGWcDdFrview Profile Status Complete Last Updated 03302025"
-      // candidateProfile:"Abhishek Kuswaha Email Phone LinkedIn GitHub Experience Backend Developer at Aurjobs for 9 months skilled in developing and optimizing backend services using Nodejs Express and PostgreSQL experienced in frontend development with Reactjs and Nextjs implemented and integrated AI based job matching algorithms optimized and managed MongoDB and PostgreSQL databases improved system performance scalability and security collaborated with cross functional teams to design and deploy new features debugged and troubleshot issues ensuring platform stability Technical Skills Proficient in JavaScript React Nodejs Express familiar with MongoDB PostgreSQL Firebase well versed in REST APIs microservices architecture and Git GitHub basic understanding of AI ML concepts Education Bachelor of Technology BTech from Uptu graduated in 2025 with 6 CGPA Personal Details Age 24 years old Location Delhi Gender Male Language Proficiencies English Beginner Hindi Beginner Spanish Beginner Work Preference Hybrid Availability Immediately Financial Details Current Salary 75000 Professional Links GitHub httpsgithubcomabhishek LinkedIn httpslinkedincominanjali Resume vegooglecomfiled1fdYF5Jl7bUhCEIDjfZw6KzDhmGWcDdFrview Profile Status Complete Last Updated 03282025"
-    },
-    job: {
-      requiredSkills: jobDetails?.job_skills_required?.join(', ') || '',
-      experienceRequired: jobDetails?.job_experience_required?.toString() || '0',
-      // jobDescription: jobDetails?.job_description || '',
-      jobDescription: convertJobDescriptionToOneLine(jobDetails?.job_description) || '',
+    // candidate: {
+    //   skills: skills || '',
+    //   experience: experience || '0',
+    //   candidateProfile: formatCandidateProfile(candidateProfile)
+    //   // candidateProfile:"SIDDHARTH GEERANAVAR Bengaluru siddharthsgeeranavar@gmail.com +91-9380633458 Linkedin Portfolio PROFESSIONAL SUMMARY As a passionate UIUX designer I have cultivated a strong foundation in user experience and interface design I am eager to bring my expertise and creativity to a dynamic team and contribute to impactful digital solution My commitment to continuous learning and attention to detail drives me to stay ahead of design trends and deliver exceptional user experiences SKILLS Tools Figma Adobe Photoshop Design Skills UIUX design App design Website design Responsive design Email template design Poster design Design System Wireframing Prototyping UI Principles Color theory Typography Design Principles Research Skills User Research UX Laws Problem Solving Skills Design Thinking Problem Solving UX Design Principles EXPERIENCE UIUX Designer Freelance May 2024 June 2024 Designed a social media app in which a person can post anything watch videos read news and can send message to others via unique id EDUCATION Master of Computer Application February 2023 October 2024 Dayananda Sagar College of Engineering Bengaluru CGPA 7.910 Bachelor of Computer Application August 2019 September 2022 KLE RLS BCA College Belagavi Percentage 63 PROJECTS Pre-owned car website design January 2024 January 2024 I designed a website in which a person can check out the pre-owned cars book a test drive book a service The person can also checkout the status of the service can compare cars filter out cars check cars based on category Furniture website design February 2024 February 2024 Designed a website design in which a person can check out different kind furniture and buy them The user can book a service for old furniture sell and exchange furniture and will be able to customize furniture Shoes app design March 2024 March 2024 Designed a shoe app in which a person can view and buy shoe brands like Puma Nike Adidas Restaurant menu app design April 2024 April 2024 The restaurant menu is aimed at creating a visually appealing and user-friendly digital menu Mobile app signup flow design July 2024 July 2024 This involves designing a mobile app signup flow aimed at making the account creation process user friendly Email Marketing Template design August 2024 August 2024 The primary purpose of the template is to promote and showcase the luxury and features of Rolex submariner watch CERTIFICATIONS Google via Coursera Foundation of User Experience Design IBM Enterprise of Design Thinking Practioner Infosys UX and UI Designing with Color Theory Great Learning UIUX for Beginners GUVI Learn design thinking and create better UIUX design Lets Upgrade Figma Bootcamp Lets Upgrade Graphic Designing Bootcamp"
+    //   // candidateProfile:"Abhishek Kuswaha Email Phone LinkedIn GitHub Backend Developer at Aurjobs for 9 months skilled in React JavaScript Express.js Next.js Node.js Firebase REST API PostgreSQL developed and optimized backend services using Node.js Express optimized and managed MongoDB and PostgreSQL databases implemented AI-based job matching algorithms improved system performance scalability and security collaborated with cross-functional teams to design and deploy new features debugged and troubleshot issues ensuring platform stability Bachelor of Technology BTech from Uptu graduated in 2025 with 6 CGPA Age 24 Location Delhi Gender Male Language Proficiencies English Beginner Hindi Beginner Spanish Beginner Work Preference Hybrid Availability Immediately Current Salary 75000 GitHub httpsgithubcomabhishek LinkedIn httpslinkedincominanjali Resume vegooglecomfiled1fdYF5Jl7bUhCEIDjfZw6KzDhmGWcDdFrview Profile Status Complete Last Updated 03302025"
+    //   // candidateProfile:"Abhishek Kuswaha Email Phone LinkedIn GitHub Experience Backend Developer at Aurjobs for 9 months skilled in developing and optimizing backend services using Nodejs Express and PostgreSQL experienced in frontend development with Reactjs and Nextjs implemented and integrated AI based job matching algorithms optimized and managed MongoDB and PostgreSQL databases improved system performance scalability and security collaborated with cross functional teams to design and deploy new features debugged and troubleshot issues ensuring platform stability Technical Skills Proficient in JavaScript React Nodejs Express familiar with MongoDB PostgreSQL Firebase well versed in REST APIs microservices architecture and Git GitHub basic understanding of AI ML concepts Education Bachelor of Technology BTech from Uptu graduated in 2025 with 6 CGPA Personal Details Age 24 years old Location Delhi Gender Male Language Proficiencies English Beginner Hindi Beginner Spanish Beginner Work Preference Hybrid Availability Immediately Financial Details Current Salary 75000 Professional Links GitHub httpsgithubcomabhishek LinkedIn httpslinkedincominanjali Resume vegooglecomfiled1fdYF5Jl7bUhCEIDjfZw6KzDhmGWcDdFrview Profile Status Complete Last Updated 03282025"
+    // },
+    // job: {
+    //   requiredSkills: jobDetails?.job_skills_required?.join(', ') || '',
+    //   experienceRequired: jobDetails?.job_experience_required?.toString() || '0',
+    //   // jobDescription: jobDetails?.job_description || '',
+    //   jobDescription: convertJobDescriptionToOneLine(jobDetails?.job_description) || '',
 
-    }
+    // }
+
+    resume: formatCandidateProfile(candidateProfile),
+    job_desc: convertJobDescriptionToOneLine(jobDetails?.job_description) || '',
+    prompt: "You are a recruiter evaluating a candidate's resume against a job description.\n\nJob Description: {job_desc}\n\nCandidate Resume: {resume}\n\nPlease assess both the technical skills (programming languages, tools, frameworks, relevant experience) and soft skills (design thinking, communication, adaptability, eagerness to learn, empathy, communication, employee engagement). Take into account their education, certifications, and project experience.\n\nProvide a match score from 0 to 100 based on how well the candidate fits the role, giving realistic weight to the key technical requirements and some consideration to soft skills and learning potential.\n\nReturn your response in this exact format:\nmatchscore: X%, review: Y\n\nWhere:\n- X is an integer between 0 and 100 representing the overall match\n- Y is a brief review justifying the score, pointing out both strengths and gaps"
+
   };
 
+  
 
   const aiScreening = async () => {
     try {
-      const res = await axios.post(`${BASEURL}/match/getJobMatch`,
-        screeningData,
+      // const res = await axios.post(`${BASEURL}/match/getJobMatch`,
+      const res = await axios.post("http://ec2-13-233-104-70.ap-south-1.compute.amazonaws.com:8000/match/",
+      // const res = await axios.post("/api/match/",
+
+
+        screeningData
+       ,
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true
+          withCredentials: false
         }
       );
-      if (res?.data?.success) {
-        const score = res?.data?.match?.matchScore;
+      console.log(res)
+
+      if (res?.data) {
+        const score = res?.data?.match_score;
+        // const score = res?.data?.match.matchScore;
+
+        console.log(score)
         setCandidateScore(score);
+      //   setCandidateScore(score);
         return score;
       }
       return 0;
@@ -354,9 +331,47 @@ const JobDetailsPage = () => {
     }
   };
 
+  // const aiScreening = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       "http://ec2-13-233-104-70.ap-south-1.compute.amazonaws.com:8000/match/",  // :white_check_mark: Hardcoded local FastAPI URL
+  //       {
+  //         resume: "Priya has a background in Human Resources and experience with employee onboarding, communication tools, and team management. She is a strong communicator, empathetic, and eager to learn new technologies.",
+  //         job_desc: "Looking for an SDE intern with strong skills in Node.js, Express, React, PostgreSQL, and understanding of AI-based job matching algorithms.",
+  //         prompt: `You are a recruiter evaluating a candidate's resume against a job description.
+  // Job Description: {job_desc}
+  // Candidate Resume: {resume}
+  // Please assess both the technical skills (programming languages, tools, frameworks, relevant experience) and soft skills (design thinking, communication, adaptability, eagerness to learn, empathy, communication, employee engagement). Take into account their education, certifications, and project experience.
+  // Provide a match score from 0 to 100 based on how well the candidate fits the role, giving realistic weight to the key technical requirements and some consideration to soft skills and learning potential.
+  // Return your response in this exact format:
+  // matchscore: X%, review: Y
+  // Where:
+  // - X is an integer between 0 and 100 representing the overall match
+  // - Y is a brief review justifying the score, pointing out both strengths and gaps`
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json"
+  //         },
+  //         withCredentials: false
+  //       }
+  //     );
+  // console.log(res?.data)
+  //     if (res?.data?.match_score) {
+  //       const score = res.data.match_score;
+  //       setCandidateScore(score);
+  //       return score;
+  //     }
+  //     return 0;
+  //   } catch (error) {
+  //     console.error("AI Screening error:", error);
+  //     return 0;
+  //   }
+  // };
+
   const handleApply = async () => {
 
-
+     
     if (!isAuthenticated) {
       setShowLoginModal(true);
       return;
@@ -385,9 +400,11 @@ const JobDetailsPage = () => {
       setIsAIScreening(false);
     }, 5000); // Adjust timing as needed
 
-
+     
     if (score >= 60) {
+      console.log(score)
       try {
+        console.log("Apply api initated")
         const res = await axios.post(`${BASEURL}/jobs_post/apply_job`, {
           job_id: jobDetails.job_id,
           candidate_id,
