@@ -3,8 +3,11 @@ import React, { useState } from 'react'
 
 
 const PersonalInformation = ({ isEditing, candidateData, handleInputChange, errors }) => {
+  // const [candidateData, setCandidateData] = useState(initialCandidateData || {});
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
+
+  const candidateData1 = candidateData || {};
 
   const handleSubmit = () => {
     if (imageUrl) {
@@ -47,9 +50,9 @@ const PersonalInformation = ({ isEditing, candidateData, handleInputChange, erro
               ${isEditing ? 'border-gray-300 cursor-pointer hover:border-blue-400' : 'border-gray-200'} 
               transition-all duration-200 group`}
           >
-            {candidateData?.candidate_image_link ? (
+            {candidateData1?.candidate_image_link ? (
               <img
-                src={candidateData?.candidate_image_link}
+                src={candidateData1?.candidate_image_link}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -70,7 +73,7 @@ const PersonalInformation = ({ isEditing, candidateData, handleInputChange, erro
         {/* Form Fields */}
         <div className="lg:col-span-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {['First Name', 'Last Name', 'Email', 'Phone'].map((field) => {
+            {['First Name', 'Last Name', 'Email', 'Phone']?.map((field) => {
               const fieldKey = `candidate_${field.toLowerCase().replace(' ', '_')}`;
               return (
                 <div key={fieldKey} className="relative group">
@@ -82,7 +85,7 @@ const PersonalInformation = ({ isEditing, candidateData, handleInputChange, erro
                       <input
                         type={field === 'Email' ? 'email' : field === 'Phone' ? 'tel' : 'text'}
                         name={fieldKey}
-                        value={candidateData[fieldKey]}
+                        value={candidateData1[fieldKey]}
                         onChange={handleInputChange}
                         className={`w-full px-4 py-3 rounded-lg border-2 bg-white 
                                 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 
@@ -97,7 +100,7 @@ const PersonalInformation = ({ isEditing, candidateData, handleInputChange, erro
                   ) : (
                     <div className="py-3">
                       <span className="text-sm text-gray-600">{field}</span>
-                      <p className="mt-1 text-gray-900">{candidateData[fieldKey] || 'Not provided'}</p>
+                      <p className="mt-1 text-gray-900">{candidateData1[fieldKey] || 'Not provided'}</p>
                     </div>
                   )}
                 </div>

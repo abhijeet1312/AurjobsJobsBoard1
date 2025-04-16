@@ -3,19 +3,21 @@ import { Briefcase, MapPin, Clock, IndianRupee } from 'lucide-react';
 import { BASEURL } from '../utility/config';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAllJobs } from '../redux/jobSlice';
 
 const FeaturedJobs = () => {
 
   const [jobs, setJobs] = useState()
   const [jobLoading, setJobLoading] = useState(false)
   const [error, setError] = useState()
- 
+  const dispatch = useDispatch()
 
 
 
   const fetchAllJobs = async () => {
     try {
-      console.log("APi calling initated")
+      // console.log("APi calling initated")
       setJobLoading(true); // Set loading to true before the API call
       setError(null);
       const res = await axios.get(`${BASEURL}/jobs_post/jobs`, {
@@ -24,11 +26,12 @@ const FeaturedJobs = () => {
         },
         withCredentials: true
       })
-      console.log("Api called")
+      // console.log("Api called")
 
-      console.log(res?.data)
+      // console.log(res?.data)
       setJobLoading(false);
       setJobs(res?.data);
+      dispatch(setAllJobs(res?.data))
       // setLoading(false);
 
 

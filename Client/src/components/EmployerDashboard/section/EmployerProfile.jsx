@@ -12,7 +12,7 @@ import { updateEmployerProfile } from '../../../redux/employerSlice';
 const EmployerProfile = () => {
   const dispatch = useDispatch();
   const employerData = useSelector((state) => state.employer?.employerProfile);
- console.log(employerData.employer_id);
+//  console.log(employerData.employer_id);
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfile, setEditedProfile] = useState({});
 

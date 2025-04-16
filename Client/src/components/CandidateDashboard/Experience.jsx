@@ -155,7 +155,7 @@ const Experience = ({ candidateData, isEditing, handleExperienceArrayItemChange,
             </div>
 
             <div className="space-y-8">
-                {candidateData.experiences?.map((exp) => (
+                {candidateData?.experiences?.map((exp) => (
                     <div
                         key={exp.experience_id}
                         className="relative group rounded-xl bg-white p-6 border border-gray-200 

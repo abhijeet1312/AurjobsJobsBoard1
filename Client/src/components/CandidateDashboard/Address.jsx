@@ -32,7 +32,7 @@ const Address = ({ candidateData, isEditing, handleAddressArrayItemChange, addAd
       </div>
 
       <div className="space-y-8">
-        {candidateData.addresses?.map((address) => (
+        {candidateData?.addresses?.map((address) => (
           <div
             key={address.address_id}
             className="relative group rounded-xl bg-white p-6 border border-gray-200 

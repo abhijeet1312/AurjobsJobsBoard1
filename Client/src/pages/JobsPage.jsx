@@ -19,6 +19,7 @@ import axios from 'axios';
 import { BASEURL } from '../utility/config';
 import { useSearchParams } from 'react-router-dom';
 import JobCardSkeleton from '../components/JobCardSkeleton';
+import { useSelector } from 'react-redux';
 
 const JobsPage = () => {
 
@@ -26,7 +27,9 @@ const JobsPage = () => {
     const keyword = searchParams.get('keyword');
     const keywordLocation = searchParams.get('location');
     const keywordIndustry = searchParams.get('industry');
-    console.log(keywordIndustry)
+    const {allJobs} = useSelector((state)=>state.job)
+    console.log((allJobs));
+    // console.log(keywordIndustry)
 
     const filterCategories = [
         {
@@ -62,8 +65,8 @@ const JobsPage = () => {
     ];
 
     // State management
-    const [jobs, setJobs] = useState();
-    const [loading, setLoading] = useState(true);
+    const [jobs, setJobs] = useState(allJobs);
+    const [loading, setLoading] = useState(false);
     const [jobLoading, setJobLoading] = useState(false);
     const [error, setError] = useState(null);
     const [filters, setFilters] = useState({
@@ -143,11 +146,11 @@ const JobsPage = () => {
         // Remove all non-numeric characters and parse
         return parseInt(salaryString.replace(/[^0-9]/g, '')) || 0;
     };
-
+ 
 
     const fetchAllJobs = async () => {
         try {
-            console.log("APi calling initated")
+            // console.log("APi calling initated")
             setJobLoading(true); // Set loading to true before the API call
             setError(null);
             const res = await axios.get(`${BASEURL}/jobs_post/jobs`, {
@@ -156,9 +159,9 @@ const JobsPage = () => {
                 },
                 withCredentials: true
             })
-            console.log("Api called") 
+            // console.log("Api called") 
 
-            console.log(res?.data)
+            // console.log(res?.data)
             setJobLoading(false);
             setJobs(res?.data);
             // setLoading(false);
@@ -173,11 +176,11 @@ const JobsPage = () => {
     }
 
     // Load initial jobs
-    useEffect(() => {
-        fetchAllJobs()
+    // useEffect(() => {
+    //     fetchAllJobs()
 
-        setLoading(false);
-    }, []);
+    //     setLoading(false);
+    // }, []);
 
     useEffect(() => {
         setCurrentPage(1);
