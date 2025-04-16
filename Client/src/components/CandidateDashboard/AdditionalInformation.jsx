@@ -43,7 +43,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
           ) : (
             <div className="py-3">
               <span className="text-sm text-gray-600">Availability</span>
-              <p className="mt-1 text-gray-900">{candidateData.candidate_availability || 'Not provided'}</p>
+              <p className="mt-1 text-gray-900">{candidateData?.candidate_availability || 'Not provided'}</p>
             </div>
           )}
         </div>
@@ -58,7 +58,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
               <input
                 type="date"
                 name="candidate_date_of_birth"
-                value={candidateData.candidate_date_of_birth || ''}
+                value={candidateData?.candidate_date_of_birth || ''}
                 onChange={handleInputChange}
                 required
                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 group-hover:border-blue-300 transition-all duration-300 ease-in-out"
@@ -67,7 +67,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
           ) : (
             <div className="py-3">
               <span className="text-sm text-gray-600">Date of Birth</span>
-              <p className="mt-1 text-gray-900">{candidateData.candidate_date_of_birth || 'Not provided'}</p>
+              <p className="mt-1 text-gray-900">{candidateData?.candidate_date_of_birth || 'Not provided'}</p>
             </div>
           )}
         </div>
@@ -81,7 +81,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
               </label>
               <select
                 name="candidate_gender"
-                value={candidateData.candidate_gender || ''}
+                value={candidateData?.candidate_gender || ''}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 group-hover:border-blue-300 transition-all duration-300 ease-in-out"
               >
@@ -95,7 +95,7 @@ const AdditionalInformation = ({ isEditing, candidateData, handleInputChange }) 
           ) : (
             <div className="py-3">
               <span className="text-sm text-gray-600">Gender</span>
-              <p className="mt-1 text-gray-900">{candidateData.candidate_gender || 'Not provided'}</p>
+              <p className="mt-1 text-gray-900">{candidateData?.candidate_gender || 'Not provided'}</p>
             </div>
           )}
         </div>

@@ -94,7 +94,7 @@ const Languages = ({ isEditing,addLangugeArrayItem, candidateData, handleInputCh
       </div>
 
       <div className="grid grid-cols-1 gap-4">
-        {candidateData.languages.map((lang) => (
+        {candidateData?.languages.map((lang) => (
           <div
             key={lang.language_id}
             className="relative group rounded-xl bg-white p-6 border border-gray-200 

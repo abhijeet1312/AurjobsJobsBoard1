@@ -80,7 +80,7 @@ const Skills = ({addSkillArrayItem, isEditing,removeSkillArrayItem,handleSkillsA
 </div>
 
 <div className="space-y-4">
-  {candidateData.skills.map((skill) => (
+  {candidateData?.skills.map((skill) => (
     <div
       key={skill.skill_id}
       className="relative group rounded-xl bg-white p-6 border border-gray-200 

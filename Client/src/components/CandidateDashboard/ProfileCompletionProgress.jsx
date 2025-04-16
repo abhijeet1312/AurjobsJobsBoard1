@@ -84,63 +84,63 @@ const ProfileCompletionProgress = ({ candidateData }) => {
     {
       name: 'Personal Info',
       check: () => !!(
-        candidateData.candidate_first_name && 
-        candidateData.candidate_last_name && 
-        candidateData.candidate_email && 
-        candidateData.candidate_phone && 
-        candidateData.candidate_gender && 
-        candidateData.candidate_date_of_birth
+        candidateData?.candidate_first_name && 
+        candidateData?.candidate_last_name && 
+        candidateData?.candidate_email && 
+        candidateData?.candidate_phone && 
+        candidateData?.candidate_gender && 
+        candidateData?.candidate_date_of_birth
       )
     },
     // Professional Details
     {
       name: 'Professional Details',
       check: () => !!(
-        candidateData.candidate_current_role && 
-        candidateData.candidate_work_preference
+        candidateData?.candidate_current_role && 
+        candidateData?.candidate_work_preference
       )
     },
     // Experiences
     {
       name: 'Work Experience',
-      check: () => candidateData.experiences && candidateData.experiences.length > 0
+      check: () => candidateData?.experiences && candidateData?.experiences?.length > 0
     },
     // Skills
     {
       name: 'Skills',
-      check: () => candidateData.skills && candidateData.skills.length > 0
+      check: () => candidateData?.skills && candidateData?.skills?.length > 0
     },
     // Languages
     {
       name: 'Languages',
-      check: () => candidateData.languages && candidateData.languages.length > 0
+      check: () => candidateData?.languages && candidateData?.languages.length > 0
     },
     // Education
     {
       name: 'Education',
-      check: () => candidateData.education && candidateData.education.length > 0
+      check: () => candidateData?.education && candidateData?.education.length > 0
     },
     // Certifications
     {
       name: 'Certifications',
-      check: () => candidateData.certifications && candidateData.certifications.length > 0
+      check: () => candidateData?.certifications && candidateData?.certifications.length > 0
     },
     // Addresses
     {
       name: 'Address',
-      check: () => candidateData.addresses && candidateData.addresses.length > 0
+      check: () => candidateData?.addresses && candidateData.addresses.length > 0
     },
     // Preferences
     {
       name: 'Job Preferences',
-      check: () => candidateData.preferences && candidateData.preferences.length > 0
+      check: () => candidateData?.preferences && candidateData.preferences.length > 0
     },
     // Online Profiles
     {
       name: 'Online Profiles',
       check: () => !!(
-        candidateData.candidate_github_link || 
-        candidateData.candidate_linkedin_link
+        candidateData?.candidate_github_link || 
+        candidateData?.candidate_linkedin_link
       )
     }
   ];

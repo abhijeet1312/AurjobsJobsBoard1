@@ -8,13 +8,13 @@ const ModernResumePreview = ({resumeData}) => {
     };
 
     return (
-        <div id="resume" className="bg-white shadow-lg rounded-lg overflow-hidden mx-auto max-w-4xl">
+        <div id="resume" className="bg-white shadow-lg rounded-lg overflow-hidden mx-auto max-w-4xl" >
 
-            <div className="p-8">
+            <div className="p-6">
                 {/* Header */}
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-2">{resumeData.personalInfo.name}</h1>
-                    <h2 className="text-xl text-gray-700 mb-3">{resumeData.personalInfo.title}</h2>
+                <div className="text-center mb-4">
+                    <h1 className="text-2xl font-bold text-gray-900 mb-2">{resumeData.personalInfo.name}</h1>
+                    <h2 className="text-xl text-gray-700 mb-2">{resumeData.personalInfo.title}</h2>
                     <div className="flex justify-center flex-wrap gap-3 text-sm text-gray-600">
                         <span>{resumeData.personalInfo.email}</span>
                         <span className="hidden sm:inline">•</span>
@@ -29,13 +29,13 @@ const ModernResumePreview = ({resumeData}) => {
                 </div>
 
                 {/* Summary */}
-                <div className="mb-8">
+                <div className="mb-4">
                     <h3 className="text-lg font-semibold mb-2 text-gray-900 border-b border-gray-200 pb-1">Professional Summary</h3>
-                    <p className="text-gray-700">{resumeData.personalInfo.summary}</p>
+                    <p className="text-gray-700 text-sm">{resumeData.personalInfo.summary}</p>
                 </div>
 
                 {/* Experience */}
-                <div className="mb-8">
+                <div className="mb-4">
                     <h3 className="text-lg font-semibold mb-4 text-gray-900 border-b border-gray-200 pb-1">Experience</h3>
                     {resumeData.experience.map((exp) => (
                         <div key={exp.id} className="mb-5">
@@ -52,8 +52,8 @@ const ModernResumePreview = ({resumeData}) => {
                 </div>
 
                 {/* Education */}
-                <div className="mb-8">
-                    <h3 className="text-lg font-semibold mb-4 text-gray-900 border-b border-gray-200 pb-1">Education</h3>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2 text-gray-900 border-b border-gray-200 pb-1">Education</h3>
                     {resumeData.education.map((edu) => (
                         <div key={edu.id} className="mb-5">
                             <div className="flex flex-col sm:flex-row justify-between mb-1">
@@ -69,8 +69,8 @@ const ModernResumePreview = ({resumeData}) => {
                 </div>
 
                 {/* Skills */}
-                <div className="mb-8">
-                    <h3 className="text-lg font-semibold mb-3 text-gray-900 border-b border-gray-200 pb-1">Skills</h3>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2 text-gray-900 border-b border-gray-200 pb-1">Skills</h3>
                     <div className="flex flex-wrap gap-2">
                         {resumeData.skills.map((skill, index) => (
                             <span
@@ -84,7 +84,7 @@ const ModernResumePreview = ({resumeData}) => {
                 </div>
 
                 {/* Projects */}
-                <div className="mb-8">
+                <div className="mb-4">
                     <h3 className="text-lg font-semibold mb-4 text-gray-900 border-b border-gray-200 pb-1">Projects</h3>
                     {resumeData.projects.map((project) => (
                         <div key={project.id} className="mb-5">

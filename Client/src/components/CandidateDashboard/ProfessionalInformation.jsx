@@ -97,7 +97,7 @@ const ProfessionalInformation = ({ isEditing, candidateData, handleInputChange, 
                     ) : (
                         <div className="py-3">
                             <span className="text-sm text-gray-600">Current Role</span>
-                            <p className="mt-1 text-gray-900">{candidateData.candidate_current_role || 'Not provided'}</p>
+                            <p className="mt-1 text-gray-900">{candidateData?.candidate_current_role || 'Not provided'}</p>
                         </div>
                     )}
                 </div>
@@ -112,7 +112,7 @@ const ProfessionalInformation = ({ isEditing, candidateData, handleInputChange, 
                             <input
                                 type="number"
                                 name="candidate_current_salary"
-                                value={candidateData.candidate_current_salary}
+                                value={candidateData?.candidate_current_salary}
                                 onChange={handleInputChange}
                                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white 
                    focus:border-blue-500 focus:ring-2 focus:ring-blue-200 
@@ -124,8 +124,8 @@ const ProfessionalInformation = ({ isEditing, candidateData, handleInputChange, 
                         <div className="py-3">
                             <span className="text-sm text-gray-600">Current Salary</span>
                             <p className="mt-1 text-gray-900">
-                                {candidateData.candidate_current_salary
-                                    ? `$${Number(candidateData.candidate_current_salary).toLocaleString()}`
+                                {candidateData?.candidate_current_salary
+                                    ? `$${Number(candidateData?.candidate_current_salary).toLocaleString()}`
                                     : 'Not provided'}
                             </p>
                         </div>
@@ -153,7 +153,7 @@ const ProfessionalInformation = ({ isEditing, candidateData, handleInputChange, 
                     ) : (
                         <div className="py-3">
                             <span className="text-sm text-gray-600">Location</span>
-                            <p className="mt-1 text-gray-900">{candidateData.candidate_location || 'Not provided'}</p>
+                            <p className="mt-1 text-gray-900">{candidateData?.candidate_location || 'Not provided'}</p>
                         </div>
                     )}
                 </div>
@@ -183,7 +183,7 @@ const ProfessionalInformation = ({ isEditing, candidateData, handleInputChange, 
                     ) : (
                         <div className="py-3">
                             <span className="text-sm text-gray-600">Work Preference</span>
-                            <p className="mt-1 text-gray-900">{candidateData.candidate_work_preference || 'Not provided'}</p>
+                            <p className="mt-1 text-gray-900">{candidateData?.candidate_work_preference || 'Not provided'}</p>
                         </div>
                     )}
                 </div>

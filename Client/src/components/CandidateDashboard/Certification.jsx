@@ -28,7 +28,7 @@ const Certification = ({ addCertificationArrayItem,isEditing,handleCertification
       </div>
 
       <div className="space-y-6">
-        {candidateData.certifications.map((cert) => (
+        {candidateData?.certifications.map((cert) => (
           <div
             key={cert.certification_id}
             className="relative group rounded-xl bg-white p-6 border border-gray-200 

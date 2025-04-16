@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes,  useLocation } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 import Navbar from './components/Navbar'
 import MainPage from './pages/MainPage'
 import CandidateRegisterPage from './pages/CandidateRegisterPage'
@@ -28,12 +28,15 @@ import ATSScoreChecker from './components/ATSScoreChecker'
 import AIResumeMainPage from './components/ResumeBuilder/AIResumeMainPage'
 import AIResumeBuilder from './components/ResumeBuilder/AIResumeBuilder'
 import ResumeTemplateSelector from './components/ResumeBuilder/ResumeTemplateSelector'
+import ProtectedRouteCandidate from './components/ProtectedRouteCandidate'
+import ProtectedRouteEmployer from './components/ProtectedRouteEmployer'
+import NotFound404 from './pages/NotFound404'
 
 
 const AppRouter = () => {
 
-    const location = useLocation();
-  
+  const location = useLocation();
+
   // Define routes where Navbar should not appear
   const routesWithoutNavbar = [
     '/candidate_login',
@@ -47,32 +50,37 @@ const AppRouter = () => {
 
   return (
     <>
-    {shouldShowNavbar && <Navbar />}
+      {shouldShowNavbar && <Navbar />}
       <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path='/candidate_register' element={<CandidateRegisterPage />} />
-          <Route path='/candidate_login' element={<CandidateLoginPage />} />
-          <Route path='/contact' element={<ContactPage />} />
-          <Route path='/candidate_dashboard' element={<CandidateDashboard/>} /> 
-          <Route path='/employer_dashboard' element={<Dashboard/>} />  {/* Add this route */}
-          <Route path='/company_login' element={<CompanyLogin/>}/>
-          <Route path='/company_register' element={<CompanyRegistration/>}/>
-          <Route path='/jobs' element={<JobsPage/>}/>
-          <Route path='/jobs/:jobTitle' element={<JobDetailsPage/>}/>
-          <Route path="/employer_dashboard/jobs/:jobId" element={<JobDetails />} />
-          <Route path="/Pricing" element={<Pricing />} /> 
-          <Route path='/payment_gateway' element={<PaymentGateway/>}/>
-          <Route path='/privacy_policy' element={<PrivacyPolicy/>}/>
-          <Route path='/terms_and_conditions' element={<TermsofService/>}/>
-          <Route path='/applicant_profile/:id' element={<ApplicantProfile/>}/>
-          <Route path='/admin_login' element={<AdminLogin/>}/>
-          <Route path='/admin_dashboard' element={<AdminDashboard/>} />
-          <Route path='/admin_dashboard/companies/:id/jobs' element={<CompanyJobsPage/>} />
-          <Route path='/ai_resume_builder' element={<AIResumeMainPage/>}/>
-          <Route path='/ai_resume_builder_form' element={<AIResumeBuilder/>}/>
-          <Route path='/ats_score_checker' element={<ATSScoreChecker/>}/>
-          <Route path='/resume_template_selector' element={<ResumeTemplateSelector/>}/>
-        </Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path='/candidate_register' element={<CandidateRegisterPage />} />
+        <Route path='/candidate_login' element={<CandidateLoginPage />} />
+        <Route path='/contact' element={<ContactPage />} />
+        <Route path='/candidate_dashboard' element={<ProtectedRouteCandidate>
+          <CandidateDashboard />
+        </ProtectedRouteCandidate>}
+        />
+        <Route path='/employer_dashboard' element={<ProtectedRouteEmployer><Dashboard /></ProtectedRouteEmployer>} />  {/* Add this route */}
+        <Route path='/company_login' element={<CompanyLogin />} />
+        <Route path='/company_register' element={<CompanyRegistration />} />
+        <Route path='/jobs' element={<JobsPage />} />
+        <Route path='/jobs/:jobTitle' element={<JobDetailsPage />} />
+        <Route path="/employer_dashboard/jobs/:jobId" element={<ProtectedRouteEmployer><JobDetails /></ProtectedRouteEmployer>} />
+        <Route path="/Pricing" element={<Pricing />} />
+        <Route path='/payment_gateway' element={<PaymentGateway />} />
+        <Route path='/privacy_policy' element={<PrivacyPolicy />} />
+        <Route path='/terms_and_conditions' element={<TermsofService />} />
+        <Route path='/applicant_profile/:id' element={<ProtectedRouteEmployer><ApplicantProfile /></ProtectedRouteEmployer>} />
+        <Route path='/admin_login' element={<AdminLogin />} />
+        <Route path='/admin_dashboard' element={<AdminDashboard />} />
+        <Route path='/admin_dashboard/companies/:id/jobs' element={<CompanyJobsPage />} />
+        <Route path='/ai_resume_builder' element={<AIResumeMainPage />} />
+        <Route path='/ai_resume_builder_form' element={<AIResumeBuilder />} />
+        <Route path='/ats_score_checker' element={<ATSScoreChecker />} />
+        <Route path='/resume_template_selector' element={<ResumeTemplateSelector />} />
+        <Route path="*" element={<NotFound404/>} />
+        <Route path="/404" element={<NotFound404 />} />
+      </Routes>
     </>
   )
 }

@@ -162,7 +162,7 @@ const Preference = ({ candidateData, isEditing, handlePreferenceArrayItemChange,
             </div>
 
             <div className="space-y-8">
-                {candidateData.preferences?.map((preference) => (
+                {candidateData?.preferences?.map((preference) => (
                     <div
                         key={preference.preference_id}
                         className="relative group rounded-xl bg-white p-6 border border-gray-200 
