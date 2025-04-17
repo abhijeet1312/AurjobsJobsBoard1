@@ -3,6 +3,7 @@ import JobPost from './section/JobPost';
 import { UserCircle, BriefcaseIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import EmployerProfile from './section/EmployerProfile';
 import { useLocation } from 'react-router-dom';
+import AIScreening from './section/AIScreening';
 
 const EmployerDashBoard = () => {
   const [activeSection, setActiveSection] = useState("profile");
@@ -10,7 +11,9 @@ const EmployerDashBoard = () => {
 
   const navItems = [
     { id: 'profile', icon: UserCircle, label: 'Profile' },
-    { id: 'job_post', icon: BriefcaseIcon, label: 'Job Post' }
+    { id: 'job_post', icon: BriefcaseIcon, label: 'Job Post' },
+    { id: 'ai_screening', icon: BriefcaseIcon, label: 'AI Screening' }
+
   ];
 
   const location = useLocation();  // Hook to access location state
@@ -69,6 +72,8 @@ const EmployerDashBoard = () => {
       <main className={`flex-1 transition-all duration-300 ease-in-out ${isExpanded ? 'ml-64' : 'ml-20'}`}>
         {activeSection === 'profile' && <EmployerProfile />}
         {activeSection === 'job_post' && <JobPost />}
+        {activeSection === 'ai_screening' && <AIScreening />}
+
       </main>
     </div>
   );

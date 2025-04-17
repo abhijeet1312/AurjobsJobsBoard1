@@ -31,9 +31,9 @@ const JobDetailsPage = () => {
   console.log(candidateProfile)
   const candidate_id = candidateProfile?.candidate_id;
   const params = useParams()
-  const location = useLocation();
+  // const location = useLocation();
 
-  const job_id = location.state?.jobId;
+  // const job_id = location.state?.jobId;
 
 
 
@@ -495,16 +495,16 @@ const JobDetailsPage = () => {
   useEffect(() => {
 
     const loadJobAndApplicationStatus = async () => {
-      await fetchJobDetails(job_id);
+      await fetchJobDetails(params.jobId);
 
       if (isAuthenticated && candidate_id) {
-        await checkApplicationStatus(job_id, candidate_id);
+        await checkApplicationStatus(params.jobId, candidate_id);
       }
     };
 
     loadJobAndApplicationStatus();
 
-  }, [job_id, candidate_id, isAuthenticated]);
+  }, [params.jobId, candidate_id, isAuthenticated]);
 
 
 
@@ -520,7 +520,7 @@ const JobDetailsPage = () => {
           <meta name="description" content={`${jobDetails?.job_title} job opportunity at ${jobDetails?.company_display_name}. ${jobDetails?.job_experience_required} years experience required. Location: ${jobDetails?.job_location}`} />
           <meta property="og:title" content={`${jobDetails?.job_title} at ${jobDetails?.company_display_name}`} />
           <meta property="og:description" content={jobDetails?.description} />
-          <meta property="og:url" content={`http://jobs.aurjobs.com/jobs/${params.jobTitle}`} />
+          <meta property="og:url" content={`http://jobs.aurjobs.com/jobs/${params.jobTitle}/${params.jobId}`} />
           <meta name="application-name" content="Aurjobs Job Portal" />
 
           <meta property="og:site_name" content="Aurjobs Job Portal" />
