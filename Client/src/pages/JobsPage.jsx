@@ -63,7 +63,7 @@ const JobsPage = () => {
         { value: 'companyZA', label: 'Company (Z-A)' },
         { value: 'salaryHighToLow', label: 'Salary (High to Low)' }
     ];
-
+ 
     // State management
     const [jobs, setJobs] = useState(allJobs);
     const [loading, setLoading] = useState(false);

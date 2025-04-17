@@ -80,8 +80,8 @@ const JobCard = ({ job }) => {
                                 {job.job_location}
                             </span>
                         </div>
-                        <Link to={`/jobs/${createSlug(job.job_title)}`}
-                            state={{ jobId: job?.job_id }}
+                        {/* <Link to={`/jobs/${createSlug(job.job_title)}/${job?.job_id}`}
+                            
                         >
                             <button className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white 
  bg-blue-600 hover:bg-blue-700 transition-colors duration-300 shadow-sm hover:shadow">
@@ -92,7 +92,31 @@ const JobCard = ({ job }) => {
                                         d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
                             </button>
-                        </Link>
+                        </Link> */}
+                        <a
+                            href={`/jobs/${createSlug(job.job_title)}/${job?.job_id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <button className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white 
+    bg-blue-600 hover:bg-blue-700 transition-colors duration-300 shadow-sm hover:shadow">
+                                View Details
+                                <svg
+                                    className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                    />
+                                </svg>
+                            </button>
+                        </a>
+
                     </div>
                 </div>
             </div>
