@@ -28,7 +28,7 @@ const JobDetailsPage = () => {
   const [candidateScore, setCandidateScore] = useState(null);
   const navigate = useNavigate();
   const { candidateProfile, isAuthenticated } = useSelector((state) => state.candidate);
-  console.log(candidateProfile)
+  // console.log(candidateProfile)
   const candidate_id = candidateProfile?.candidate_id;
   const params = useParams()
   // const location = useLocation();
@@ -72,7 +72,7 @@ const JobDetailsPage = () => {
 
 
 
-  console.log(candidateProfile)
+  // console.log(candidateProfile)
 
   const education = candidateProfile?.education?.map((edu) => `${edu.candidate_degree} (${edu.candidate_education_level}) from ${edu.candidate_institute}, Score: ${edu.candidate_score}, ${edu.candidate_start_year}-${edu.candidate_end_year}`).join(', ');
 
@@ -302,7 +302,7 @@ const JobDetailsPage = () => {
   const aiScreening = async () => {
     try {
       // const res = await axios.post(`${BASEURL}/match/getJobMatch`,
-      const res = await axios.post("http://ec2-13-233-104-70.ap-south-1.compute.amazonaws.com:8000/match/",
+      const res = await axios.post("https://resumebuilder-rp4z.onrender.com/match/",
       // const res = await axios.post("/api/match/",
 
 
@@ -371,7 +371,7 @@ const JobDetailsPage = () => {
 
   const handleApply = async () => {
 
-     
+     console.log("Applu started")
     if (!isAuthenticated) {
       setShowLoginModal(true);
       return;
