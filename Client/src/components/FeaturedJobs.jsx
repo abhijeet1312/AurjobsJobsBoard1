@@ -3,7 +3,7 @@ import { Briefcase, MapPin, Clock, IndianRupee } from 'lucide-react';
 import { BASEURL } from '../utility/config';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAllJobs } from '../redux/jobSlice';
 
 const FeaturedJobs = () => {
@@ -12,43 +12,44 @@ const FeaturedJobs = () => {
   const [jobLoading, setJobLoading] = useState(false)
   const [error, setError] = useState()
   const dispatch = useDispatch()
+  const {allJobs} = useSelector((state)=>state.job)
 
 
 
-  const fetchAllJobs = async () => {
-    try {
-      // console.log("APi calling initated")
-      setJobLoading(true); // Set loading to true before the API call
-      setError(null);
-      const res = await axios.get(`${BASEURL}/jobs_post/jobs`, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        withCredentials: true
-      })
-      // console.log("Api called")
+  // const fetchAllJobs = async () => {
+  //   try {
+  //     // console.log("APi calling initated")
+  //     setJobLoading(true); // Set loading to true before the API call
+  //     setError(null);
+  //     const res = await axios.get(`${BASEURL}/jobs_post/jobs`, {
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       withCredentials: true
+  //     })
+  //     // console.log("Api called")
 
-      // console.log(res?.data)
-      setJobLoading(false);
-      setJobs(res?.data);
-      dispatch(setAllJobs(res?.data))
-      // setLoading(false);
-
-
-    } catch (err) {
-      console.log(err)
-      setJobLoading(false);
-    } finally {
-      setJobLoading(false);
-    }
-  }
+  //     // console.log(res?.data)
+  //     setJobLoading(false);
+  //     setJobs(res?.data);
+  //     dispatch(setAllJobs(res?.data))
+  //     // setLoading(false);
 
 
-  const featuredJobs = jobs?.slice(0, 6)
+  //   } catch (err) {
+  //     console.log(err)
+  //     setJobLoading(false);
+  //   } finally {
+  //     setJobLoading(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    fetchAllJobs()
-  }, [])
+
+  const featuredJobs = allJobs?.slice(0, 6)
+
+  // useEffect(() => {
+  //   fetchAllJobs()
+  // }, [])
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">

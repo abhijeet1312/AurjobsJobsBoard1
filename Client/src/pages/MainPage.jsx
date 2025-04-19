@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import HeroSection from '../components/HeroSection'
 import FeaturedJobs from '../components/FeaturedJobs'
@@ -9,8 +9,44 @@ import Testimonials from '../components/Testimonials'
 import Platform from '../components/Platform'
 import FAQ from '../components/FAQ'
 import { Helmet } from 'react-helmet-async'
+import { setAllJobs } from '../redux/jobSlice'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
+import { BASEURL } from '../utility/config'
 
 const MainPage = () => {
+
+  const dispatch = useDispatch()
+
+
+  const fetchAllJobs = async () => {
+    try {
+
+
+      const res = await axios.get(`${BASEURL}/jobs_post/jobs`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: true
+      })
+
+
+
+      dispatch(setAllJobs(res?.data))
+      // setLoading(false);
+
+
+    } catch (err) {
+      console.log(err)
+
+    }
+  }
+
+
+
+  useEffect(() => {
+    fetchAllJobs()
+  }, [])
   return (
     <>
       <Helmet>

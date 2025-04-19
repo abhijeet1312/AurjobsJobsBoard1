@@ -32,6 +32,7 @@ import ProtectedRouteCandidate from './components/ProtectedRouteCandidate'
 import ProtectedRouteEmployer from './components/ProtectedRouteEmployer'
 import NotFound404 from './pages/NotFound404'
 import AIScreeningResult from './components/EmployerDashboard/section/AIScreeningResult'
+import BlueCollarJobsPage from './pages/BlueCollarJobsPage'
 
 
 const AppRouter = () => {
@@ -81,6 +82,7 @@ const AppRouter = () => {
         <Route path='/ats_score_checker' element={<ATSScoreChecker />} />
         <Route path='/resume_template_selector' element={<ResumeTemplateSelector />} />
         <Route path='/ai_screening_result' element={<AIScreeningResult/>}/>
+        <Route path='/blue_collar_jobs' element={<BlueCollarJobsPage/>}/>
         <Route path="*" element={<NotFound404/>} />
         <Route path="/404" element={<NotFound404 />} />
       </Routes>
