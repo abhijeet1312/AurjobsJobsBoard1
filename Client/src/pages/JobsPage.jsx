@@ -450,6 +450,7 @@ const JobsPage = () => {
                                     <option value="full-time">Full time</option>
                                     <option value="internship">Internship</option>
                                     <option value="contract">Contract</option>
+                                    <option value="blue-collar">Blue Collar</option>
                                 </select>
                             </div>
                         </div>
